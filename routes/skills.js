@@ -7,6 +7,6 @@ const router = Router()
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, skillsCtrl.createSkill)
-
+router.get('/', checkAuth, skillsCtrl.index)
 
 export { router }

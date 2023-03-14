@@ -18,6 +18,19 @@ const createSkill = async (req, res) => {
   }
 }
 
+const index = async (req, res) => {
+  try {
+    const skills = await Skill.find({})
+    .populate('skillOwner')
+    .sort({ createdAt: 'desc' })
+    res.status(200).json(skills)
+  } catch (error) {
+    console.log("This is the problem", error);
+    res.status(500).json(error)
+  }
+}
+
 export { 
-  createSkill
+  createSkill,
+  index
 }
