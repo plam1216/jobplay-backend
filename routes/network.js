@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as networksCtrl from '../controllers/networks.js'
+import * as networkCtrl from '../controllers/network.js'
 import { decodeUserFromToken, checkAuth } from '../middleware/auth.js'
 
 const router = Router()
@@ -9,6 +9,6 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
-router.get('/', checkAuth, networksCtrl.index)
+router.get('/', checkAuth, networkCtrl.index)
 
 export { router }
