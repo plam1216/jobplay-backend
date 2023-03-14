@@ -12,14 +12,17 @@ const eventSchema = new Schema({
 
 const connectionSchema = new Schema({
   name: String,
-  attended: {type: Boolean, default: false}
+  title: String,
+  company: String,
+  attendee: {type: Schema.Types.ObjectId, ref: 'Profile'}
 } , {
   timestamps: true
 })
 
 const networkSchema = new Schema({
-  name: String,
-  photo: String
+  networker: {type: Schema.Types.ObjectId, ref: 'Profile'},
+  event: [eventSchema],
+  connection: [connectionSchema],
 },{
   timestamps: true,
 })
