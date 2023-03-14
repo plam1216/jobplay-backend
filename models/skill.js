@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const skillSchema = new Schema({
   skillName: String,
-  owner: { type: Schema.Types.ObjectId, ref: 'Profile' }
+  skillOwner: { type: Schema.Types.ObjectId, ref: 'Profile' }
 }, {
   timestamps: true
 })

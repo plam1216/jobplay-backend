@@ -25,7 +25,7 @@ app.use(formData.parse())
 // mount imported routes
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
-app.use('/skills', skillsRouter)
+app.use('/api/skills', skillsRouter)
 
 // handle 404 errors
 app.use(function (req, res, next) {
