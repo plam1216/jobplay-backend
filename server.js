@@ -11,6 +11,7 @@ import './config/database.js'
 // import routes
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
+import { router as skillsRouter } from './routes/skills.js'
 import { router as jobsRouter } from './routes/jobs.js'
 
 // create the express app
@@ -25,6 +26,7 @@ app.use(formData.parse())
 // mount imported routes
 app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/skills', skillsRouter)
 app.use('/api/jobs', jobsRouter)
 
 // handle 404 errors
