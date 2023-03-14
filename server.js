@@ -23,9 +23,9 @@ app.use(express.json())
 app.use(formData.parse())
 
 // mount imported routes
-app.use('/profiles', profilesRouter)
-app.use('/auth', authRouter)
-app.use('/network', networkRouter)
+app.use('/api/profiles', profilesRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/network', networkRouter)
 
 
 
