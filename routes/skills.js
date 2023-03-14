@@ -8,5 +8,6 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, skillsCtrl.createSkill)
 router.get('/', checkAuth, skillsCtrl.index)
+router.put('/:id', checkAuth, skillsCtrl.update)
 
 export { router }

@@ -30,7 +30,23 @@ const index = async (req, res) => {
   }
 }
 
+const update  = async (req, res) => {
+  try {
+    const skill = await Skill.findByIdAndUpdate(
+      req.params.id, 
+      req.body,
+      { new: true }
+    )
+    .populate('skillOwner')
+    res.status(200).json(skill)
+  } catch (error) {
+    console.log("ERROR", error)
+    res.status(500).json(error)
+  }
+}
+
 export { 
   createSkill,
-  index
+  index,
+  update
 }
