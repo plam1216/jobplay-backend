@@ -4,6 +4,14 @@ const Schema = mongoose.Schema
 
 const eventSchema = new Schema({
   name: String,
+  attended: {type: Boolean, default: false},
+  attendee: {type: Schema.Types.ObjectId, ref: 'Profile'}
+} , {
+  timestamps: true
+})
+
+const connectionSchema = new Schema({
+  name: String,
   attended: {type: Boolean, default: false}
 } , {
   timestamps: true
