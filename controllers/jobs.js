@@ -49,9 +49,9 @@ const deleteJob = (req, res) => {
 const updateJob = (req, res) => {
     Job.findById(req.params.id)
         .then(job => {
-            if (job.owner._id.equals(req.user.profile)) {
+            if (job.applicant._id.equals(req.user.profile)) {
                 Job.findByIdAndUpdate(req.params.id, req.body, { new: true })
-                    .populate('owner')
+                    .populate('applicant')
                     .then(updatedJob => {
                         res.json(updatedJob)
                     })
