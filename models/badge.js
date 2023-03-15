@@ -10,6 +10,6 @@ const badgeSchema = new Schema({
   timestamps: true,
 })
 
-const Badge = mongoose.model('Badge', profileSchema)
+const Badge = mongoose.model('Badge', badgeSchema)
 
 export { Badge }

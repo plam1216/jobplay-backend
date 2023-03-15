@@ -14,6 +14,7 @@ import { router as authRouter } from './routes/auth.js'
 import { router as networkRouter } from './routes/network.js'
 import { router as skillsRouter } from './routes/skills.js'
 import { router as jobsRouter } from './routes/jobs.js'
+import { router as badgeRouter } from './routes/badge.js'
 
 // create the express app
 const app = express()
@@ -30,6 +31,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/network', networkRouter)
 app.use('/api/skills', skillsRouter)
 app.use('/api/jobs', jobsRouter)
+app.use('/api/badge', badgeRouter)
 
 // handle 404 errors
 app.use(function (req, res, next) {
