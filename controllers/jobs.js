@@ -49,11 +49,21 @@ const updateJob = async (req, res) => {
             { new: true }
         )
             .populate('applicant')
-        res.status(200).json(skill)
+        res.status(200).json(job)
     } catch (error) {
         console.log("ERROR", error)
         res.status(500).json(error)
     }
 }
 
-export { index, createJob, deleteJob, updateJob }
+const showJob = async (req, res) => {
+    try {
+        const job = await Job.findById(req.params.id)
+            .populate('applicant')
+        res.status(200).json(job)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+export { index, createJob, deleteJob, updateJob, showJob }
