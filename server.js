@@ -6,7 +6,7 @@ import cors from 'cors'
 import formData from 'express-form-data'
 
 // connect to MongoDB with mongoose
-import './config/database.js'
+import db from './config/database.js'
 
 // import routes
 import { router as profilesRouter } from './routes/profiles.js'
@@ -33,6 +33,10 @@ app.use('/api/skills', skillsRouter)
 app.use('/api/jobs', jobsRouter)
 app.use('/api/badge', badgeRouter)
 
+const port = process.env.PORT || 3000
+
+app.listen(port, () => console.log(`app listening on port ${port}`))
+
 // handle 404 errors
 app.use(function (req, res, next) {
   res.status(404).json({ err: 'Not found' })
@@ -42,5 +46,15 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   res.status(err.status || 500).json({ err: err.message })
 })
+
+db.on("connected", () => {
+  console.clear();
+  console.log(chalk.blue("Connected to MongoDB!"));
+  app.listen(port, () => {
+    console.log(
+      `Express server running in development on port: ${port}`
+    );
+  });
+});
 
 export { app }
