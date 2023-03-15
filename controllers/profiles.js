@@ -13,7 +13,7 @@ function index(req, res) {
 export const getProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    const profile = await Image.findById(id)
+    const profile = await Profile.findById(id)
       .populate("badge")
       .populate("skillsUnlocked")
       .populate("networksAchieved")
@@ -33,7 +33,7 @@ export const getProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const {id} = req.params;
-    const profile = await UserData.findByIdAndUpdate(id, req.body, { new: true });
+    const profile = await Profile.findByIdAndUpdate(id, req.body, { new: true });
     res.status(201).json(profile);
   } catch (error) {
     console.error(error);
