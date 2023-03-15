@@ -10,6 +10,26 @@ function index(req, res) {
   })
 }
 
+export const getProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const profile = await Image.findById(id)
+      .populate("badge")
+      .populate("skillsUnlocked")
+      .populate("networksAchieved")
+      .populate("jobApplied")
+
+    if (profile) {
+      return res.json(profile);
+    }
+
+    res.status(404).json({ message: "Profile not found!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
