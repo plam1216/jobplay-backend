@@ -11,7 +11,7 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.get('/id/:id', checkAuth, profilesCtrl.getProfile)
-router.put("/id/:id", controllers.updateProfile);
+router.put("/id/:id", profilesCtrl.updateProfile);
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 
 export { router }
