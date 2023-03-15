@@ -7,7 +7,7 @@ const create = async (req, res) => {
     const network = await Network.create(req.body)
     const profile = await Profile.findByIdAndUpdate(
       req.user.profile,
-      { $push: {network: network}},
+      { $push: {networksAchieved: network}},
       { new: true }
     )
     network.networker = profile
