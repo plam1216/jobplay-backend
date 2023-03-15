@@ -1,69 +1,59 @@
+import { Profile } from "../models/profile.js";
 import { Job } from "../models/job.js";
 
-const index = (req, res) => {
-    Job.find({})
-        .populate('applicant')
-        .then(jobs => {
-            res.json(jobs)
-        })
-        .catch(err => {
-            console.log(err)
-            res.stats(500).json(err)
-        })
+const index = async (req, res) => {
+    try {
+        const jobs = await Job.find({})
+            .populate('applicant')
+        res.status(200).json(jobs)
+    } catch (error) {
+        console.log("This is the problem", error);
+        res.status(500).json(error)
+    }
 }
 
-const createJob = (req, res) => {
-    req.body.applicant = req.user.profile
-    console.log(req.user.applicant)
-    Job.create(req.body)
-        .then(job => {
-            Job.findById(job._id)
-                .populate('applicant')
-                .then(populatedJob => {
-                    res.json(populatedJob)
-                })
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ err: err.errmsg })
-        })
+const createJob = async (req, res) => {
+    try {
+        req.body.applicant = req.user.profile
+        const job = await Job.create(req.body)
+        const profile = await Profile.findByIdAndUpdate(
+            req.user.profile,
+            { $push: { jobApplied: job } },
+            { new: true }
+        )
+        job.applicant = profile
+        res.status(201).json(skill)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error)
+    }
 }
 
-const deleteJob = (req, res) => {
-    Job.findById(req.params.id)
-        .then(job => {
-            if (job.applicant._id.equals(req.user.profile)) {
-                Job.findByIdAndDelete(job._id)
-                    .then(deletedJob => {
-                        res.json(deletedJob)
-                    })
-            } else {
-                res.status(401).json({ err: "Not authorized" })
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ err: err.errmsg })
-        })
+const deleteJob = async (req, res) => {
+    try {
+        const job = await Job.findByIdAndDelete(req.params.id)
+        const profile = await Profile.findById(req.user.profile)
+        profile.jobApplied.remove({ _id: req.params.id })
+        await profile.save()
+        res.status(200).json(job)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
 
-const updateJob = (req, res) => {
-    Job.findById(req.params.id)
-        .then(job => {
-            if (job.applicant._id.equals(req.user.profile)) {
-                Job.findByIdAndUpdate(req.params.id, req.body, { new: true })
-                    .populate('applicant')
-                    .then(updatedJob => {
-                        res.json(updatedJob)
-                    })
-            } else {
-                res.status(401).json({ err: "Not authorized" })
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ err: err.errmsg })
-        })
+const updateJob = async (req, res) => {
+    try {
+        const job = await Job.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        )
+            .populate('applicant')
+        res.status(200).json(skill)
+    } catch (error) {
+        console.log("ERROR", error)
+        res.status(500).json(error)
+    }
 }
 
 export { index, createJob, deleteJob, updateJob }
