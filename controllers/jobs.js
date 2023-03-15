@@ -22,7 +22,7 @@ const createJob = async (req, res) => {
             { new: true }
         )
         job.applicant = profile
-        res.status(201).json(skill)
+        res.status(201).json(job)
     } catch (error) {
         console.log(error)
         res.status(500).json(error)
