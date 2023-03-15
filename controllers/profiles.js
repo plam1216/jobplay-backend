@@ -30,6 +30,17 @@ export const getProfile = async (req, res) => {
   }
 };
 
+export const updateProfile = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const profile = await UserData.findByIdAndUpdate(id, req.body, { new: true });
+    res.status(201).json(profile);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({error: error.message});
+  }
+};
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
