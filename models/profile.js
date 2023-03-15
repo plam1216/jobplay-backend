@@ -8,7 +8,7 @@ const profileSchema = new Schema({
   jobScore: Number,
   skillScore: Number,
   badge: [{ type: Schema.Types.ObjectId, ref: "Badge" }],
-  skillsUnlocke: [{ type: Schema.Types.ObjectId, ref: "Skill" }],
+  skillsUnlocked: [{ type: Schema.Types.ObjectId, ref: "Skill" }],
   networksAchieved: [{ type: Schema.Types.ObjectId, ref: "Network" }],
   jobApplied: [{ type: Schema.Types.ObjectId, ref: "Job" }],
 },{
