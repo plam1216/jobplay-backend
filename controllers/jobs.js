@@ -13,7 +13,8 @@ const index = (req, res) => {
 }
 
 const createJob = (req, res) => {
-    req.body.owner = req.user.profile
+    req.body.applicant = req.user.profile
+    console.log(req.user.applicant)
     Job.create(req.body)
         .then(job => {
             Job.findById(job._id)
