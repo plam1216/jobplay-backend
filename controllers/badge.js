@@ -32,7 +32,7 @@ export const addBadge = async (req, res) => {
   try {
     const badge = new Badge(req.body);
     await badge.save();
-    res.status(201).json(image);
+    res.status(201).json(badge);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
