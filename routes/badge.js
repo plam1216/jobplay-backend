@@ -7,5 +7,6 @@ const router = Router()
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, badgeCtrl.index)
+router.post('/', checkAuth, badgeCtrl.addBadge)
 
 export { router }

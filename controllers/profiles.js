@@ -41,6 +41,8 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
