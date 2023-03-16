@@ -3,7 +3,7 @@ import { Job } from "../models/job.js";
 
 const index = async (req, res) => {
     try {
-        const jobs = await Job.find({})
+        const jobs = await Job.find({'applicant': req.user.profile})
             .populate('applicant')
         res.status(200).json(jobs)
     } catch (error) {
