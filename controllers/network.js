@@ -20,7 +20,7 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const network = await Network.find({})
+    const network = await Network.find({networker: req.user.profile})
     .populate('networker')
     .sort({ createdAt: 'desc'})
     res.status(200).json(network)
