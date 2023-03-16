@@ -7,7 +7,7 @@ const createSkill = async (req, res) => {
     const skill = await Skill.create(req.body)
     const profile = await Profile.findByIdAndUpdate(
       req.user.profile,
-      { $push: { skills: skill } },
+      { $push: { skillsUnlocked: skill } },
       { new: true }
     )
     skill.skillOwner = profile
