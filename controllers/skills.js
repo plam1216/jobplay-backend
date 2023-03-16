@@ -20,7 +20,7 @@ const createSkill = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const skills = await Skill.find({})
+    const skills = await Skill.find({ skillOwner: req.user.profile })
     .populate('skillOwner')
     .sort({ createdAt: 'desc' })
     res.status(200).json(skills)
